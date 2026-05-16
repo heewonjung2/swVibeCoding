@@ -1,0 +1,53 @@
+# 🏥 교내 건강진료센터 셀프 접수 및 관리자 시스템 (MVP)
+
+교내 건강진료센터의 방문자 접수 프로세스를 효율화하고, 관리자(실무자)의 진료 기록 관리 및 행정 업무 비용을 혁신적으로 절감하기 위해 개발된 **단독형(Standalone) 프론트엔드 브릿지 시스템**입니다.
+
+## 🌟 주요 기능 (Key Features)
+
+### 1. 방문자 셀프 접수 시스템 (Visitor Tab)
+* **간편한 접수 인터페이스:** 학번/종번, 성명, 방문 목적(증상)을 입력하여 즉각적인 셀프 접수 가능
+* **동적 증상 선택 레이아웃:** 자주 발생하는 5대 증상(두통, 소화불량, 감기, 외상/상처, 생리통) 칩 버튼 및 '기타' 선택 시 커스텀 증상 입력 필드 활성화
+* **실시간 대기 현황판:** 현재 대기 중인 인원수 표기 및 대기자 명단 실시간 렌더링
+* **개인정보 보호 (보안):** 대기 현황판 내 방문자 성명 자동 마스킹 처리(`홍*동`, `정*원` 등) 알고리즘 적용
+
+### 2. 접수 현황 관리자 페이지 (Admin Tab)
+* **진료 기록 바인딩:** 접수된 학생의 투약 약품 정보 및 세부 처치/진료 내용을 입력하고 '진료 완료 저장' 상태 전환 기능
+* **행정 편의 단축 기능:** 실무 효율성을 극대화하기 위한 '학번 복사' 및 '전체 정보 복사' 클립보드 단축 버튼 제공
+* **조건부 날짜 필터링 (Date Picker):** * 달력 컴포넌트를 통해 특정 일자의 접수 내역만 동적 필터링 조회
+  * 오늘 날짜 선택 시 직관적인 '오늘' 배지 활성화
+  * 데이터 무결성을 위해 미래 날짜 선택 제한(`max` 가드 적용)
+
+### 3. 데이터 영속성 및 이식성 (Data Architecture)
+* **30일 영속성 로컬 스토리지:** 백엔드 인프라 없이 `localStorage`를 활용해 브라우저 재시작 시에도 데이터가 완벽히 유지되며, 앱 로드 시 **30일이 경과한 노후 데이터는 자동으로 파기(Cleanup)**하는 최적화 로직 반영
+* **행정용 CSV 내보내기 (Export):** * 관리자 페이지에서 조회 중인 일자의 진료 기록을 단 한 번의 클릭으로 `.csv` 파일로 다운로드
+  * Excel 등 외부 프로그램에서 파일 로드 시 한글 깨짐 현상을 방지하기 위해 **`\uFEFF` (UTF-8 BOM)** 인코딩 처리 완벽 적용
+
+## 🏗️ 아키텍처 설계 의도 (Design Decisions)
+
+1. **Standalone Front-end Bridge Architecture**
+   * 교내 기존 보건 관리 시스템(HIMS)의 엄격한 보안 및 API 접근 권한 제약 사항을 식별하였습니다. 이를 우회하고 실무자의 행정 비용을 즉각적으로 절감하기 위해 백엔드 인프라 구축을 전제하지 않는 단독형 구조를 채택하여 시스템 결합도를 낮추고 안정성을 극대화했습니다.
+2. **Lightweight Data Portability (Dependency-Free)**
+   * 외부 엑셀 라이브러리(SheetJS 등)의 의존성을 완전히 제거하여 프론트엔드 번들 크기와 브라우저 오버헤드를 최소화했습니다. 대신 순수 텍스트 기반의 표준 CSV 포맷 레이어를 직접 구현하여 타 행정 시스템과의 데이터 이식성을 보장합니다.
+
+## 🛠️ 기술 스택 (Tech Stack)
+
+* **Framework:** React 18 (Vite 기반 Fast Bundling)
+* **Language:** JavaScript (ES6+)
+* **Styling:** Vanilla CSS3 (Responsive Layout, Root Variables 테마 적용)
+* **State Management:** React Hooks (`useState`, `useEffect`, `useMemo`)
+* **Persistence:** Web Storage API (`localStorage`)
+
+## 🚀 로컬 실행 방법 (How to Run Locally)
+
+```bash
+# 1. 원격 저장소 복제
+git clone [https://github.com/heewonjung2/swVibeCoding.git](https://github.com/heewonjung2/swVibeCoding.git)
+
+# 2. 프로젝트 폴더 이동
+cd swVibeCoding
+
+# 3. 의존성 패키지 설치
+npm install
+
+# 4. 로컬 개발 서버 구동
+npm run dev
