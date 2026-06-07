@@ -36,18 +36,4 @@
 * **Styling:** Vanilla CSS3 (Responsive Layout, Root Variables 테마 적용)
 * **State Management:** React Hooks (`useState`, `useEffect`, `useMemo`)
 * **Persistence:** Web Storage API (`localStorage`)
-
-## 🚀 로컬 실행 방법 (How to Run Locally)
-
-```bash
-# 1. 원격 저장소 복제
-git clone [https://github.com/heewonjung2/swVibeCoding.git](https://github.com/heewonjung2/swVibeCoding.git)
-
-# 2. 프로젝트 폴더 이동
-cd swVibeCoding
-
-# 3. 의존성 패키지 설치
-npm install
-
-# 4. 로컬 개발 서버 구동
-npm run dev
+* 
