@@ -36,4 +36,4 @@
 * **Styling:** Vanilla CSS3 (Responsive Layout, Root Variables 테마 적용)
 * **State Management:** React Hooks (`useState`, `useEffect`, `useMemo`)
 * **Persistence:** Web Storage API (`localStorage`)
-* 
+  
